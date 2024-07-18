@@ -1,0 +1,40 @@
+class Solution {
+public:
+    int subarraysDivByK(vector<int>& nums, int k) {
+        int i=0;
+        long long sum=0;
+        int cnt=0;
+        while(i<nums.size()){
+            long long sum=nums[i];
+            int j=i+1, flag=0;
+            if(nums[i] <0) flag=1;
+            if(sum % k ==0) cnt++;
+            while(j<nums.size()){
+                if(nums[j] >=0){
+                    flag=0;
+                    sum+=nums[j];
+                    if(sum % k ==0) cnt++;
+                    cout<<sum<<"p "; 
+                }
+                else{
+                    if(flag==0){
+                        flag=1;
+                        sum+=nums[j];
+                        if(sum % k ==0) cnt++;
+                        cout<<sum<<"nf0 "; 
+                    }
+                    else{
+                        flag=0;
+                        sum-= (nums[j-1] *2 ) + nums[j] ;
+                       // sum = sum * -1;
+                        if(sum % k ==0) cnt++;
+                        cout<<sum<<"nf1 "; 
+                    }
+                }
+                j++;
+            }
+            i++;
+        }
+        return cnt;
+    }
+};
